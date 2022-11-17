@@ -7,11 +7,13 @@ const Product = mongoose.model('Products', {
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 10000
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        minLength: 10
     },
     imageUrl: {
         type: String,
@@ -25,6 +27,14 @@ const Product = mongoose.model('Products', {
     status: {
         type: Number,
         default: 'active'
+    },
+    author_id: {
+        type: String,
+        required: true
+    },
+    category_id: {
+        type: String,
+        required: true
     },
 })
 

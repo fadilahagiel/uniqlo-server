@@ -8,11 +8,11 @@ const authentication = async (req, res, next) => {
             throw { name: "invalid_token" }
         }
         const payload = verifyJWT(access_token)
-        const user = await User.findOne({ _id: payload.id  })
+        const user = await User.findOne({ _id: payload.id })
         if (!user) {
             throw { name: "invalid_token" }
         }
-        req.user = { id: user._id, name: user.name }
+        req.user = { id: user._id}
         next();
     } catch (error) {
         if (error.name === "invalid_token" || error.name === "JsonWebTokenError") {
