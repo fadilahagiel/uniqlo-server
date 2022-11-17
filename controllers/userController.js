@@ -3,19 +3,18 @@ const { getToken } = require("../helpers/jwt");
 const User = require("../models/user");
 
 class UserController{
-    static async register(req, res) {
+    static async register(req, res, next) {
         try {
             const { email, password, role, username } = req.body
-            const hashedPassword = hashPassword(password)
-            const user = new User({ email, password:hashedPassword, role, username })
+            const user = new User({ email, password, role, username })
             const newUser = await user.save()
             res.status(201).json(newUser)
         } catch (error) {
-            res.status(500).json({message: "ISE"})
+            next(error)
         }
     }
 
-    static async login(req, res) {
+    static async login(req, res, next) {
         try {
             const { email, password } = req.body 
             const userFound = await User.findOne({
@@ -28,7 +27,7 @@ class UserController{
             const access_token = getToken(payload)
             res.status(200).json({access_token})
         } catch (error) {
-            res.status(500).json({ message: "ISE" })
+            next(error)
         }
     }
 }

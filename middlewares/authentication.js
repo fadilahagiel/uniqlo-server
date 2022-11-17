@@ -12,7 +12,7 @@ const authentication = async (req, res, next) => {
         if (!user) {
             throw { name: "invalid_token" }
         }
-        req.user = { id: user._id}
+        req.user = { id: user._id, username: user.username}
         next();
     } catch (error) {
         if (error.name === "invalid_token" || error.name === "JsonWebTokenError") {
