@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const password = process.env.MONGO_PASS
 
-const uri = `mongodb+srv://fadilahagiel:${password}@cluster0.uojn3ps.mongodb.net/?retryWrites=true&w=majority`
+const uri = `mongodb+srv://fadilahagiel:${password}@cluster0.uojn3ps.mongodb.net/uniqlo_clone`
 
 mongoose.connect(uri)
 const db = mongoose.connection
