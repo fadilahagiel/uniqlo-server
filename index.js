@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config()
 }
 const express = require('express')
-const { route } = require("./routes")
+const route  = require("./routes")
 const app = express()
 const port = 3000
 require('./config/mongoose')

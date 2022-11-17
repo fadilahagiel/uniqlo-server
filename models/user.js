@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-const User = mongoose.Schema({
+const {isEmail} = require('validator')
+const User = mongoose.model('Users', {
     username: {
         type: String,
         required: true
@@ -8,10 +8,7 @@ const User = mongoose.Schema({
     email: {
         type: String,
         required: true,
-        validate: {
-            validator: () => Promise.resolve(false),
-            message: 'Email validation failed'
-        }
+        validate: [isEmail, 'invalid email format']
     },
     password: {
         type: String,
@@ -24,4 +21,4 @@ const User = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Users', User)
+module.exports = User
