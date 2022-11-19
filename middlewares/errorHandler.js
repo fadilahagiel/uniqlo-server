@@ -5,10 +5,13 @@ const errorHandlers = async (err, req, res, next) => {
     if (err.name == 'ValidationError') {
         code = 400
         message = Object.values(err.errors)[0].message
-    } if (err.name == 'MongoServerError') {
+    } else if (err.name == 'empty_input') {
+        code = 400
+        message = "Every input can't be empty"
+    } else if (err.name == 'MongoServerError') {
         code = 400
         message = "Email address already in use"
-    }else if (err.name == 'error_login') {
+    } else if (err.name == 'error_login') {
         code = 401
         message = "invalid email or password"
     } else if (err.name == "invalid_credentials") {
