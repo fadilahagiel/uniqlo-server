@@ -17,6 +17,9 @@ const errorHandlers = async (err, req, res, next) => {
     } else if (err.name == "invalid_credentials") {
         code = 404
         message = "error not found"
+    } else if (err.name == "Invalid_credentials") {
+        code = 404
+        message = err.message
     } else if (err.name == "forbidden") {
         code = 403
         message = "forbidden"

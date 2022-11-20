@@ -1,6 +1,6 @@
 const { findOne } = require('../models/product')
 const Product = require('../models/product')
-
+const Category = require('../models/category')
 class ProductController {
     static async showAllProduct(req, res, next) {
         try {
@@ -26,6 +26,8 @@ class ProductController {
         try {
             const { name, price, description, imageUrl, stock, category } = req.body
             const author = req.user.username
+            const categoryFound = await Category.findOne({ name: category })
+            if (!categoryFound) throw{name: "Invalid_credentials", message: "Category not found"}
             const product = new Product({ name, price, description, imageUrl, stock, category, author })
             const newProduct = await product.save()
             res.status(201).json({newProduct})
