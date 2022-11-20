@@ -1,4 +1,4 @@
-const { hashPassword, comparePassword } = require("../helpers/bcrypt");
+const { comparePassword } = require("../helpers/bcrypt");
 const { getToken } = require("../helpers/jwt");
 const User = require("../models/user");
 
@@ -30,6 +30,8 @@ class UserController{
             next(error)
         }
     }
+
+    
 }
 
 module.exports = UserController
